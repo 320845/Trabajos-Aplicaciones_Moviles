@@ -1,0 +1,24 @@
+getPokemonData();
+
+function getPokemonData() {
+    fetch("https://pokeapi.co/api/v2/pokemon/hydreigon")
+    .then(response => response.json())
+    .then(pokemonData => {
+    
+    const rawName = pokemonData.name;
+    const formattedName = rawName[0].toUpperCase() + rawName.slice(1);
+    const abilities = pokemonData.abilities.map(abilityInfo => abilityInfo.ability.name);
+    const types = pokemonData.types.map(typeInfo => typeInfo.type.name);
+    const stats = pokemonData.stats.map(statInfo => statInfo.stat.name);
+
+    
+    console.log("   Name: ", formattedName, "\n");
+    console.log(" Abilities:", abilities, "\n");
+    console.log(" Types:", types, "\n");
+    console.log(" Stats:", stats);
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
